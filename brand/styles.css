@@ -1,0 +1,318 @@
+/* ==========================================================================
+   Valon brand stylesheet
+   Visual tokens and base styles extracted from https://valon.com
+   Import this into any artifact (demo, slide deck, doc, prototype) to get an
+   on-brand look. Either link it directly:
+       <link rel="stylesheet" href="/brand/styles.css">
+   or pull only the tokens you need from the :root block below.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Fonts
+   The Valon site renders in Lato, with Roboto Slab as a serif accent. Its
+   design system also names Founders Grotesk as the display face, but that font
+   is commercial and not served on the site, so it leads the display stack and
+   falls back to Lato. Lato, Roboto Slab, and Roboto are free Google Fonts; the
+   import below pulls them. Drop this @import if your host bundles fonts itself.
+   -------------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Roboto+Slab:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap');
+
+/* --------------------------------------------------------------------------
+   2. Tokens
+   -------------------------------------------------------------------------- */
+:root {
+  /* Brand core ---------------------------------------------------------- */
+  --valon-amber: #FFAD15;        /* the logo star; signature brand color */
+  --valon-amber-deep: #F0A72D;   /* darker amber for fills and hovers */
+  --valon-orange: #F9841A;       /* icon and accent orange */
+  --valon-orange-bright: #F35A1E;/* high-energy accent, sparing use */
+
+  --valon-blue: #4477EB;         /* primary action and link color */
+  --valon-blue-strong: #3776F3;
+  --valon-blue-deep: #2155BD;
+  --valon-blue-ink: #0A3386;     /* darkest blue, for text on light tints */
+  --valon-blue-tint: #EBF3FF;    /* pale blue surface */
+
+  /* Ink and neutrals ---------------------------------------------------- */
+  --valon-black: #000000;
+  --valon-ink: #27292B;          /* primary dark surface and heading text */
+  --valon-ink-soft: #3D3F41;
+  --valon-gray: #6F777A;         /* body text on light */
+  --valon-gray-mid: #97A2A5;
+  --valon-gray-light: #C9D0D0;   /* borders, dividers */
+
+  /* Surfaces ------------------------------------------------------------ */
+  --valon-white: #FFFFFF;
+  --valon-off-white: #FBFBFB;    /* default page background */
+  --valon-surface: #F3F3F3;      /* cards, wells, icon badges */
+
+  /* Status -------------------------------------------------------------- */
+  --valon-green: #177326;        /* success, confirmation */
+  --valon-green-deep: #31752F;
+  --valon-red: #B32316;          /* error, destructive */
+  --valon-yellow: #F1BA50;       /* caution */
+
+  /* Semantic aliases (use these in components) -------------------------- */
+  --color-bg: var(--valon-off-white);
+  --color-surface: var(--valon-white);
+  --color-text: var(--valon-gray);
+  --color-heading: var(--valon-ink);
+  --color-accent: var(--valon-amber);
+  --color-action: var(--valon-blue);
+  --color-border: var(--valon-gray-light);
+
+  /* Type ---------------------------------------------------------------- */
+  --font-display: 'Founders Grotesk', 'Lato', -apple-system, BlinkMacSystemFont,
+                  'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-body: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica,
+               Arial, sans-serif;
+  --font-serif: 'Roboto Slab', Georgia, 'Times New Roman', serif;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 700;
+  --weight-black: 900;
+
+  /* A type scale drawn from the site's heading sizes. */
+  --text-xs: 0.8125rem;   /* 13px */
+  --text-sm: 1rem;        /* 16px */
+  --text-base: 1.0625rem; /* 17px */
+  --text-md: 1.3125rem;   /* 21px */
+  --text-lg: 1.625rem;    /* 26px */
+  --text-xl: 1.9375rem;   /* 31px */
+  --text-2xl: 2.0625rem;  /* 33px */
+  --text-3xl: 3.1875rem;  /* 51px */
+  --text-4xl: 4.0625rem;  /* 65px */
+
+  --leading-tight: 1.1;
+  --leading-snug: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.65;
+
+  /* Space, radius, shadow ----------------------------------------------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+
+  --radius-sm: 4px;
+  --radius: 8px;          /* the site's default on images and cards */
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(39, 41, 43, 0.06);
+  --shadow: 0 6px 20px rgba(39, 41, 43, 0.08);
+  --shadow-lg: 0 18px 48px rgba(39, 41, 43, 0.12);
+
+  --transition: 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --container-max: 1128px; /* the site's content max-width */
+}
+
+/* --------------------------------------------------------------------------
+   3. Base elements
+   Scoped so you can opt in by adding class="valon" to a wrapper, or apply
+   globally by targeting the root. Both selectors are kept in sync below.
+   -------------------------------------------------------------------------- */
+.valon,
+body.valon {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-relaxed);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.valon h1, .valon h2, .valon h3, .valon h4, .valon h5, .valon h6 {
+  font-family: var(--font-display);
+  color: var(--color-heading);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  margin: 0 0 var(--space-4);
+}
+
+.valon h1 { font-size: var(--text-4xl); letter-spacing: -0.02em; }
+.valon h2 { font-size: var(--text-3xl); letter-spacing: -0.015em; }
+.valon h3 { font-size: var(--text-2xl); }
+.valon h4 { font-size: var(--text-xl); }
+.valon h5 { font-size: var(--text-lg); }
+.valon h6 { font-size: var(--text-md); }
+
+.valon p { margin: 0 0 var(--space-6); }
+
+.valon a {
+  color: var(--color-action);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+.valon a:hover { color: var(--valon-blue-deep); }
+
+.valon strong { font-weight: var(--weight-bold); }
+.valon em { font-style: italic; }
+
+.valon code, .valon pre {
+  font-family: 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+}
+.valon pre {
+  background: var(--valon-ink);
+  color: var(--valon-surface);
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  overflow-x: auto;
+}
+.valon code { color: var(--valon-blue-deep); }
+.valon pre code { color: inherit; }
+
+.valon img { max-width: 100%; border-radius: var(--radius); }
+
+.valon hr {
+  border: 0;
+  border-top: 1px solid var(--color-border);
+  margin: var(--space-8) 0;
+}
+
+/* --------------------------------------------------------------------------
+   4. Layout helpers
+   -------------------------------------------------------------------------- */
+.valon-container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+.valon-section { padding-block: var(--space-24); }
+
+/* Dark section: flip text and surfaces to the ink palette. */
+.valon-section--dark {
+  background-color: var(--valon-ink);
+  color: var(--valon-gray-light);
+}
+.valon-section--dark h1,
+.valon-section--dark h2,
+.valon-section--dark h3,
+.valon-section--dark h4,
+.valon-section--dark h5,
+.valon-section--dark h6 { color: var(--valon-white); }
+.valon-section--dark a { color: var(--valon-amber); }
+.valon-section--dark a:hover { color: var(--valon-orange); }
+
+/* --------------------------------------------------------------------------
+   5. Buttons
+   -------------------------------------------------------------------------- */
+.valon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  line-height: 1;
+  padding: 0.875rem 1.75rem;
+  border: 2px solid transparent;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color var(--transition), color var(--transition),
+              border-color var(--transition), transform var(--transition);
+}
+.valon-btn:hover { transform: translateY(-1px); }
+
+/* Primary: the brand blue action button. */
+.valon-btn--primary {
+  background-color: var(--valon-blue);
+  color: var(--valon-white);
+}
+.valon-btn--primary:hover {
+  background-color: var(--valon-blue-deep);
+  color: var(--valon-white);
+}
+
+/* Accent: the amber emphasis button, for the single hero call to action. */
+.valon-btn--accent {
+  background-color: var(--valon-amber);
+  color: var(--valon-ink);
+}
+.valon-btn--accent:hover { background-color: var(--valon-amber-deep); }
+
+/* Dark: solid ink button for light backgrounds. */
+.valon-btn--dark {
+  background-color: var(--valon-ink);
+  color: var(--valon-white);
+}
+.valon-btn--dark:hover { background-color: var(--valon-black); }
+
+/* Outline: quiet secondary action. */
+.valon-btn--outline {
+  background-color: transparent;
+  color: var(--valon-ink);
+  border-color: var(--valon-ink);
+}
+.valon-btn--outline:hover {
+  background-color: var(--valon-ink);
+  color: var(--valon-white);
+}
+
+/* --------------------------------------------------------------------------
+   6. Cards
+   -------------------------------------------------------------------------- */
+.valon-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.valon-card:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   7. Icon badge
+   Mirrors the round badges on the site (light fill, line-art glyph). Drop an
+   <img> from brand/assets/icons inside it, or any inline SVG.
+   -------------------------------------------------------------------------- */
+.valon-icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: var(--radius-pill);
+  background-color: var(--valon-surface);
+}
+.valon-icon-badge img,
+.valon-icon-badge svg { width: 60%; height: 60%; }
+
+/* --------------------------------------------------------------------------
+   8. Small utilities
+   -------------------------------------------------------------------------- */
+.valon-text-accent { color: var(--valon-amber); }
+.valon-text-action { color: var(--valon-blue); }
+.valon-text-muted { color: var(--valon-gray-mid); }
+.valon-serif { font-family: var(--font-serif); }
+.valon-bg-ink { background-color: var(--valon-ink); color: var(--valon-gray-light); }
+.valon-bg-surface { background-color: var(--valon-surface); }
+.valon-rounded { border-radius: var(--radius); }
+
+/* Tighten the display scale on small screens to match the site's behavior. */
+@media (max-width: 768px) {
+  :root {
+    --text-4xl: 2.3125rem; /* 37px */
+    --text-3xl: 1.4375rem; /* 23px */
+    --text-2xl: 1.375rem;  /* 22px */
+    --text-xl: 1.4375rem;  /* 23px */
+  }
+  .valon-section { padding-block: var(--space-12); }
+}

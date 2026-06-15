@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valon brand preview</title>
+  <link rel="icon" href="assets/logos/valon-brandmark.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="valon">
+
+  <!-- Hero -->
+  <section class="valon-section">
+    <div class="valon-container">
+      <img src="assets/logos/valon-wordmark-dark.png" alt="Valon" style="height:48px;width:auto;border-radius:0;margin-bottom:var(--space-8)">
+      <h1>Homeownership, <span class="valon-text-accent">handled.</span></h1>
+      <p style="font-size:var(--text-md);max-width:46ch">A master stylesheet and asset kit so every demo, slide, and prototype in this repo carries the Valon look.</p>
+      <div style="display:flex;gap:var(--space-4);flex-wrap:wrap;margin-top:var(--space-6)">
+        <a class="valon-btn valon-btn--primary" href="#">Primary action</a>
+        <a class="valon-btn valon-btn--accent" href="#">Accent CTA</a>
+        <a class="valon-btn valon-btn--outline" href="#">Secondary</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Swatches -->
+  <section class="valon-section valon-bg-surface" style="padding-block:var(--space-12)">
+    <div class="valon-container">
+      <h3>Palette</h3>
+      <div style="display:flex;gap:var(--space-3);flex-wrap:wrap;margin-top:var(--space-6)">
+        <div style="width:96px"><div style="height:64px;border-radius:var(--radius);background:var(--valon-amber)"></div><small>amber</small></div>
+        <div style="width:96px"><div style="height:64px;border-radius:var(--radius);background:var(--valon-orange)"></div><small>orange</small></div>
+        <div style="width:96px"><div style="height:64px;border-radius:var(--radius);background:var(--valon-blue)"></div><small>blue</small></div>
+        <div style="width:96px"><div style="height:64px;border-radius:var(--radius);background:var(--valon-ink)"></div><small>ink</small></div>
+        <div style="width:96px"><div style="height:64px;border-radius:var(--radius);background:var(--valon-green)"></div><small>green</small></div>
+        <div style="width:96px"><div style="height:64px;border-radius:var(--radius);background:var(--valon-gray-mid)"></div><small>gray</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cards + icon badges -->
+  <section class="valon-section">
+    <div class="valon-container">
+      <h3>Feature cards</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--space-6);margin-top:var(--space-6)">
+        <div class="valon-card">
+          <span class="valon-icon-badge"><img src="assets/icons/instant.svg" alt=""></span>
+          <h5 style="margin-top:var(--space-4)">Instant</h5>
+          <p style="margin:0">Round icon badges lifted straight from the site.</p>
+        </div>
+        <div class="valon-card">
+          <span class="valon-icon-badge"><img src="assets/icons/accurate.svg" alt=""></span>
+          <h5 style="margin-top:var(--space-4)">Accurate</h5>
+          <p style="margin:0">Cards use the 16px radius and a soft lift on hover.</p>
+        </div>
+        <div class="valon-card">
+          <span class="valon-icon-badge"><img src="assets/icons/convenient.svg" alt=""></span>
+          <h5 style="margin-top:var(--space-4)">Convenient</h5>
+          <p style="margin:0">Type is Lato, with Roboto Slab for serif accents.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dark section -->
+  <section class="valon-section valon-section--dark">
+    <div class="valon-container">
+      <img src="assets/logos/valon-brandmark.svg" alt="Valon" style="width:56px;border-radius:0;margin-bottom:var(--space-6)">
+      <h2>Dark surfaces work too</h2>
+      <p style="max-width:48ch">On ink backgrounds, links and accents shift to amber for contrast. <a href="#">Here is a link.</a></p>
+      <p class="valon-serif" style="font-size:var(--text-md);color:var(--valon-white)">A line set in Roboto Slab for a serif accent.</p>
+    </div>
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+.DS_Store
+.claude/
+.venv/
+scratchpad/
+instructions/
+prd.html.v2bak
+CLAUDE.md
+__pycache__/
+data/
