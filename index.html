@@ -959,7 +959,7 @@
         </figure>
 
         <h3>How we phase the work</h3>
-        <p>Phases 1 and 2 build the nudge-and-cure loop and the compliant agent path. Phase 3 is where this product becomes the full delinquency experience from the vision above: the workout actions stuck borrowers actually need, and the controls that let operations run the loop on its own. The same engine, scheduler, and audit trail carry all three.</p>
+        <p>Phases 1 and 2 build the nudge-and-cure loop and the compliant agent path. Phase 3 is where this product becomes the full delinquency experience from the vision above: the loan-modification actions stuck borrowers actually need, like deferring a payment or lowering the rate, and the controls that let operations run the loop on its own. The same engine, scheduler, and audit trail carry all three.</p>
 
         <div class="table-wrap">
           <table>
@@ -967,7 +967,7 @@
             <tbody>
               <tr><td><b>1. Digital self-cure loop</b></td><td>Delinquency engine, scheduler, SMS/email integrations, repayment portal with autopay toggle, late-fee automation</td><td>Forgetful borrowers (7,331 loans)</td><td>Covers the most volume at the lowest cost. Establishes the engine and audit trail that every later phase depends on.</td></tr>
               <tr><td><b>2. Agent path</b></td><td>Agent collections workspace, Promise-to-Pay capture, mail integration</td><td>Stuck borrowers (542 loans) and the agents who work them</td><td>Closes the compliance gap for the day-36 group. Only 24% are reachable digitally; the rest need phone and mail.</td></tr>
-              <tr><td><b>3. Workout layer and ops handoff</b></td><td>Loan-modification actions on the same scheduler (defer a payment, extend a due date, a temporary rate reduction), self-serve hardship paths for borrowers and agents, voice as a scheduled channel, and no-code copy management with experimentation for operations</td><td>The hardship tail Phase 2 surfaces, and the operations team that runs the loop day to day</td><td>By now Phases 1 and 2 have filtered the population, so the workout tools aim at the borrowers who actually need them. Operations has the data to tune copy against cure rate, and the engine is proven enough to carry loan-state changes too.</td></tr>
+              <tr><td><b>3. Loan-modification layer and ops handoff</b></td><td>Loan-modification actions on the same scheduler (defer a payment, extend a due date, a temporary rate reduction), self-serve hardship paths for borrowers and agents, voice as a scheduled channel, and no-code copy management with experimentation for operations</td><td>The hardship tail Phase 2 surfaces, and the operations team that runs the loop day to day</td><td>By now Phases 1 and 2 have filtered the population, so these tools aim at the borrowers who actually need them. Operations has the data to tune copy against cure rate, and the engine is proven enough to carry loan-state changes too.</td></tr>
             </tbody>
           </table>
         </div>
@@ -1036,7 +1036,7 @@
           <figcaption class="figure__cap"><b>Solution on a page.</b> One loan, left to right. The blue band is the self-curing window the digital loop owns; the dark band is where the day-36 group hands off to a person. The same engine and scheduler fire every event.</figcaption>
         </figure>
 
-        <p>Future phases (loan modifications, self-serve hardship tools, voice and dialer automation) slot into the same engine and scheduler without a rewrite. v1 also filters the population, so later phases aim at the borrowers who actually need a workout instead of building expensive hardship tooling for people who only needed a text.</p>
+        <p>Future phases (loan modifications, self-serve hardship tools, voice and dialer automation) slot into the same engine and scheduler without a rewrite. v1 also filters the population, so later phases aim at the borrowers who actually need a loan modification instead of building expensive hardship tooling for people who only needed a text.</p>
 
         <h3>Key decisions</h3>
         <div class="table-wrap">
@@ -1115,13 +1115,13 @@
         <p>This phase builds the timely, compliant, low-friction nudge: catch the miss early and give the borrower a one-tap path to pay and to turn on autopay. We start here for three reasons.</p>
         <p><b>It helps every past-grace borrower, in three different ways.</b> A quarter of the book passes the 15-day grace at least once, and the borrowers who do split into three groups. Most pay back within a few weeks; a smaller group drags on past day 36; a small tail never pays at all. A reminder and a cure page is the same cheap tool for all three. For the first group, it heads off a late fee they would otherwise pay. For the second, it pulls them onto autopay so the next miss does not happen, which matters because off-autopay loans pass grace at 41% against 1.6% on. For the third, it is the start of the compliance trail the regulatory clock requires.</p>
         <p><b>It builds the foundation everything else needs.</b> The engine, scheduler, and audit trail are not throwaway pieces for a notification feature. Later phases will give operators more options for borrowers in genuine hardship, and the same scheduler that sends a payment reminder today is what later fires a due-date change and the confirmation message that goes with it. Building these now means later phases plug in instead of forcing a rewrite.</p>
-        <p><b>It clears the noise so the next problem is easier to see.</b> Once the borrowers who just needed a nudge have self-cured, the ones left are the ones who need a workout. That makes Phase 2 cheaper to design and run, because hardship tooling aims at borrowers who actually need it.</p>
+        <p><b>It clears the noise so the next problem is easier to see.</b> Once the borrowers who just needed a nudge have self-cured, the ones left are the ones in real hardship. That makes Phase 2 cheaper to design and run, because hardship tooling aims at borrowers who actually need it.</p>
 
         <h3>What we are not solving now, and how we get there</h3>
-        <p>The vision in Section 2 has three borrower outcomes: a nudge for the forgetful, real workout options for the genuinely stuck, and a compliant collections path for the ones who cannot or will not pay. This phase covers the first one and the regulatory floor of the third one. The middle outcome waits for Phase 2.</p>
+        <p>The vision in Section 2 has three borrower outcomes: a nudge for the forgetful, real relief options for the genuinely stuck, like deferring a payment or lowering the rate, and a compliant collections path for the ones who cannot or will not pay. This phase covers the first one and the regulatory floor of the third one. The middle outcome waits for Phase 2.</p>
         <p><b>The forgetful borrower is covered now.</b> A reminder, a one-tap cure, and an autopay prompt. That is the bulk of the volume and the cheapest fix per loan.</p>
-        <p><b>The stuck borrower is reached now, but not yet served.</b> The day-36 compliance attempt happens, an agent picks up the call, and the reason for delinquency is recorded. But this phase does not give that borrower a workout. Deferred payments, term changes, rate reductions, and the rest of loss mitigation are Phase 2. We need to talk to the borrower before we can design what to offer them, and we need to clear the forgetful group out of the queue so the work that remains is genuine hardship.</p>
-        <p><b>The unrecoverable borrower is out of scope.</b> Credit reporting, charge-off, and sale to a collections agency follow the workout phase, because they are the path for borrowers we have already tried to help and could not.</p>
+        <p><b>The stuck borrower is reached now, but not yet served.</b> The day-36 compliance attempt happens, an agent picks up the call, and the reason for delinquency is recorded. But this phase does not yet give that borrower a way to resolve the loan. Deferred payments, term changes, rate reductions, and the rest of loss mitigation are Phase 2. We need to talk to the borrower before we can design what to offer them, and we need to clear the forgetful group out of the queue so the work that remains is genuine hardship.</p>
+        <p><b>The unrecoverable borrower is out of scope.</b> Credit reporting, charge-off, and sale to a collections agency follow the loss-mitigation phase, because they are the path for borrowers we have already tried to help and could not.</p>
         <p>Two other things are deliberately left out: voice and dialer automation, because the day-36 group needs a person and voice can be added later as one more channel; and granular roles and permissions for operations, because the audit log tied to SSO identity is enough accountability for the team size we have today.</p>
 
         <h3>What we already do, so scope is clear</h3>
@@ -1220,7 +1220,7 @@
         <h3>The stuck borrower (secondary: route, do not solve)</h3>
         <p>The 542 loans that reach day 36 are small in count but heavy in dollars and compliance exposure. Inside them, 107 are two full months behind and hold $378K, 29% of all open dollars. Some face real hardship, some are unreachable, some are both. A reminder will not fix a borrower two months behind.</p>
         <p>Today there is no schedule that guarantees they are reached and no record that they were. The current process leans on an agent remembering to follow up, which does not survive scale and cannot be proven to a regulator. After this phase: a compliant outreach cadence that does not let them fall through a crack and, when reached, a prepared agent who states the amount, seeks a Promise-to-Pay, and records whether the hardship is temporary or permanent.</p>
-        <p><b>Value to the business.</b> They are the regulatory requirement and the dollar concentration. We must attempt collections by day 36 and every 7 days after, and prove it, which today we cannot do for a single loan. We capture what they need now so Phase 2 can serve the workout. We are not building the workout itself in this phase.</p>
+        <p><b>Value to the business.</b> They are the regulatory requirement and the dollar concentration. We must attempt collections by day 36 and every 7 days after, and prove it, which today we cannot do for a single loan. We capture what they need now so Phase 2 can offer them a loan modification. We are not building that modification itself in this phase.</p>
 
         <h3>The servicing agent (internal)</h3>
         <p>The agent is the person who works the stuck-borrower tail. Today they have no queue, no script, and no record of what was said. Compliance rests on individual memory, and the work does not scale past a handful of agents. After this phase they get a worklist ranked by days past due and balance, a script that walks the required disclosures and the Promise-to-Pay ask, and a one-click way to log the call and capture the reason for delinquency. They can also edit borrower policy (autopay, payment method) and seed a one-off communication. Each action is logged with who acted and an optional reason.</p>
@@ -1775,7 +1775,7 @@
               </div>
               <div class="flow-foot__cell">
                 <h5>Exit conditions</h5>
-                <p>Payment resolves and closes the case, or both installments go unpaid and the loan routes to the workout group for Phase 2.</p>
+                <p>Payment resolves and closes the case, or both installments go unpaid and the loan routes to the hardship group for Phase 2.</p>
               </div>
             </div>
           </div>
@@ -1799,10 +1799,10 @@
             </details>
 
             <details class="flow-req">
-              <summary><svg class="flow-req__chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3l6 5-6 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Route a stuck loan to the workout path<span class="flow-req__owner">Internal tool + scheduler</span></summary>
+              <summary><svg class="flow-req__chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3l6 5-6 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Route a stuck loan to the hardship path<span class="flow-req__owner">Internal tool + scheduler</span></summary>
               <div class="flow-req__body">
                 <ul>
-                  <li>A loan the agent marks as genuine hardship is tagged for the workout group, the 107 two-months-behind loans being the clearest case.</li>
+                  <li>A loan the agent marks as genuine hardship is tagged for the hardship group, the 107 two-months-behind loans being the clearest case.</li>
                   <li>In this phase the route is a clean handoff with the reason and history attached. The loss-mitigation actions themselves, deferral and term changes, are Phase 2.</li>
                   <li>The handoff preserves the full case record, so the next step starts from the same facts rather than a cold file.</li>
                 </ul>
@@ -1816,7 +1816,7 @@
               </div>
               <div class="flow-foot__cell">
                 <h5>Feeds the metric</h5>
-                <p>Cures, autopay enrollments at cure, and routes to workout are the events behind the success measures in the next section.</p>
+                <p>Cures, autopay enrollments at cure, and routes to the hardship group are the events behind the success measures in the next section.</p>
               </div>
             </div>
           </div>
@@ -2026,15 +2026,15 @@
 
         <!-- ============ WHERE THE ROLLOUT LEADS ============ -->
         <h3 id="future-phases">Where the rollout leads: Phase 3 and the full vision</h3>
-        <p>Phases 1 and 2 stop short of the Section 2 vision in one specific way: when a borrower cannot self-cure, we have a prepared agent and a compliant trail, but we do not yet have the workout actions the agent needs to actually resolve the case. Phase 3 closes that gap. By then Phases 1 and 2 have filtered out the borrowers who only needed a nudge, so the workout tools aim at the small, dollar-heavy tail that actually needs them. The same engine, scheduler, and audit trail carry every new action, so this is capability added on top, not a second system.</p>
+        <p>Phases 1 and 2 stop short of the Section 2 vision in one specific way: when a borrower cannot self-cure, we have a prepared agent and a compliant trail, but we do not yet have the loan-modification actions the agent needs to actually resolve the case. Phase 3 closes that gap. By then Phases 1 and 2 have filtered out the borrowers who only needed a nudge, so these tools aim at the small, dollar-heavy tail that actually needs them. The same engine, scheduler, and audit trail carry every new action, so this is capability added on top, not a second system.</p>
         <p>Phase 3 has four pieces, in rough order:</p>
         <ul>
-          <li><b>Loan modifications on the same scheduler.</b> The workout actions the agent path leads to: defer a payment, extend a due date, a temporary rate reduction, a term change. Each writes back to the servicing core through the same timeline that fires today's late-fee event, and each is bundled with the compliant communication that explains the new terms. A loan's state stays reproducible from its timeline.</li>
-          <li><b>Hardship identification and self-serve options.</b> With the noise filtered out, we can spot genuine hardship earlier and surface a subset of the workout actions to the borrower directly, with the agent path as the fallback for cases that need a conversation.</li>
+          <li><b>Loan modifications on the same scheduler.</b> The relief actions the agent path leads to: defer a payment, extend a due date, a temporary rate reduction, a term change. Each writes back to the servicing core through the same timeline that fires today's late-fee event, and each is bundled with the compliant communication that explains the new terms. A loan's state stays reproducible from its timeline.</li>
+          <li><b>Hardship identification and self-serve options.</b> With the noise filtered out, we can spot genuine hardship earlier and surface a subset of these actions to the borrower directly, with the agent path as the fallback for cases that need a conversation.</li>
           <li><b>Voice as a scheduled channel.</b> 76% of the stuck group has no digital channel, so phone is the only way to reach them at scale. Phase 3 makes outbound voice a scheduled, audited event through the integration layer, alongside SMS, email, and mail, so the cadence and the record stay uniform across channels.</li>
           <li><b>Operations runs the loop.</b> No-code copy management and an experimentation layer so operations can tune outreach by message and channel against cure rate without an engineering ticket. Granular roles and permissions land here too, once the action surface is wide enough to justify them.</li>
         </ul>
-        <p>At the end of Phase 3, the three borrower outcomes from the Section 2 vision are all served by one product: a nudge for the borrower who just needs reminding, a real workout for the borrower in hardship, and a compliant collections process for the borrower who will not pay. Operations owns the metric and the copy, engineering maintains the engine, and every action is on the same audited timeline.</p>
+        <p>At the end of Phase 3, the three borrower outcomes from the Section 2 vision are all served by one product: a nudge for the borrower who just needs reminding, real relief for the borrower in hardship, and a compliant collections process for the borrower who will not pay. Operations owns the metric and the copy, engineering maintains the engine, and every action is on the same audited timeline.</p>
 
         <hr>
 
@@ -2045,19 +2045,10 @@
         <p>This document asks for alignment on four things, so we can start building the first phase.</p>
         <ol style="padding-left:var(--space-6)">
           <li><b>The problem.</b> Our delinquency rate runs above industry norms and gets more expensive as the book grows, we have no first-class experience for borrowers who fall behind, and we cannot prove a single compliant collections attempt today. Offering borrowers the option to pay has not closed the gap, and it will not.</li>
-          <li><b>Who we solve for, and why this first.</b> The forgetful borrower, who can pay and just needs a timely, low-friction nudge. They are the largest, cheapest win, and serving them clears the noise so we can see who genuinely needs a workout.</li>
+          <li><b>Who we solve for, and why this first.</b> The forgetful borrower, who can pay and just needs a timely, low-friction nudge. They are the largest, cheapest win, and serving them clears the noise so we can see who genuinely needs a loan modification.</li>
           <li><b>The shape of the solution.</b> A delinquency engine and scheduler with full audit history, digital outreach with a consent gate, a one-tap cure-and-autopay portal, and an agent workspace for the day-36 tail.</li>
           <li><b>The key decisions and the long-term vision.</b> Build a general engine rather than a reminder job, push autopay at the cure moment, route the hard cases to people, and audit everything from day one, all chosen so the later phases of the delinquency experience plug into the same foundation.</li>
         </ol>
-
-        <h3>Open questions to settle as we build</h3>
-        <p>A few decisions are deliberately left open here, because they are better made with the team and with early data.</p>
-        <ul>
-          <li>What is the right first-touch timing inside the grace window? The data shows two thirds of late payers cure within 15 days, so a gentle pre-grace reminder may lift cure rate, but it risks over-messaging. Test it.</li>
-          <li>Do we apply the late fee silently or pair it with the notice? Pairing is more transparent and likely better for trust, and it is the default assumption here.</li>
-          <li>What is the Promise-to-Pay policy when a borrower commits but misses the commitment? The engine needs a defined resume behavior, which is a compliance and operations decision.</li>
-          <li>How hard do we push autopay for borrowers who repeatedly opt out? There is a respect-versus-effectiveness line here worth setting deliberately.</li>
-        </ul>
 
         <hr>
 
