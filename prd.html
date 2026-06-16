@@ -850,6 +850,445 @@
     .demo-modal__consent { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
     .demo-check { display: inline-flex; align-items: center; gap: 6px; font-size: var(--text-sm); color: var(--valon-ink-soft); cursor: pointer; }
     .demo-check input { accent-color: var(--valon-blue); }
+
+    /* ==== Discussion slide deck ========================================= */
+    .deck {
+      max-width: var(--container-max);
+      margin-inline: auto;
+      padding: var(--space-8) var(--space-6) var(--space-24);
+    }
+
+    /* --- Progress tracker ----------------------------------------------- */
+    .deck-progress {
+      display: flex;
+      gap: var(--space-1);
+      padding: 0 0 var(--space-6);
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+    .deck-pip {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      flex: 1;
+      min-width: 0;
+      cursor: pointer;
+      padding: var(--space-3) 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--space-2);
+    }
+    .deck-pip__label {
+      font-size: 0.6875rem;
+      font-weight: var(--weight-bold);
+      letter-spacing: 0.03em;
+      color: var(--valon-gray-mid);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: left;
+      transition: color var(--transition);
+      font-family: var(--font-body);
+    }
+    .deck-pip__bar {
+      height: 4px;
+      border-radius: var(--radius-pill);
+      background: var(--valon-surface);
+      transition: background var(--transition), height var(--transition), box-shadow var(--transition);
+    }
+    .deck-pip:hover .deck-pip__label { color: var(--valon-ink); }
+    .deck-pip:hover .deck-pip__bar {
+      background: var(--valon-gray-light);
+      box-shadow: 0 0 0 2px var(--valon-gray-light);
+    }
+    .deck-pip.is-active .deck-pip__label { color: var(--valon-ink); }
+    .deck-pip.is-active .deck-pip__bar {
+      background: var(--valon-amber);
+      height: 6px;
+    }
+    .deck-pip.is-visited .deck-pip__bar { background: var(--valon-blue); }
+    .deck-pip.is-visited .deck-pip__label { color: var(--valon-gray); }
+
+    /* --- Slides --------------------------------------------------------- */
+    .deck-slide { display: none; }
+    .deck-slide.is-active {
+      display: flex;
+      flex-direction: column;
+      min-height: 480px;
+      animation: deck-fade 350ms ease both;
+    }
+    @keyframes deck-fade {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    .deck-slide h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-3xl);
+      font-weight: var(--weight-black);
+      color: var(--color-heading);
+      line-height: var(--leading-tight);
+      letter-spacing: -0.02em;
+      margin: 0 0 var(--space-8);
+    }
+    .deck-slide p {
+      font-size: var(--text-md);
+      line-height: var(--leading-normal);
+      color: var(--valon-gray);
+      margin: 0 0 var(--space-4);
+      max-width: 44em;
+    }
+    .deck-slide p b { color: var(--valon-ink); }
+
+    /* --- Navigation ----------------------------------------------------- */
+    .deck-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: var(--space-8);
+      margin-top: auto;
+    }
+    .deck-nav__counter {
+      font-size: var(--text-xs);
+      color: var(--valon-gray-mid);
+      font-weight: var(--weight-bold);
+      letter-spacing: 0.04em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* --- Title slide ----------------------------------------------------- */
+    .deck-title {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: var(--space-16) 0 var(--space-8);
+    }
+    .deck-title h2 {
+      font-size: var(--text-4xl);
+      margin-bottom: var(--space-4);
+    }
+    .deck-title p {
+      font-size: var(--text-lg);
+      color: var(--valon-gray);
+      max-width: 32em;
+    }
+
+    /* --- Agenda list ----------------------------------------------------- */
+    .deck-agenda {
+      list-style: none;
+      padding: 0;
+      margin: var(--space-8) 0 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-3);
+      counter-reset: agenda;
+    }
+    .deck-agenda-item {
+      counter-increment: agenda;
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      padding: var(--space-4) var(--space-5, 1.25rem);
+      background: var(--valon-white);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+    .deck-agenda-item:hover {
+      background: var(--valon-blue-tint);
+      border-color: var(--valon-blue);
+      box-shadow: var(--shadow-sm);
+    }
+    .deck-agenda-item::before {
+      content: counter(agenda);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--valon-ink);
+      color: var(--valon-white);
+      font-family: var(--font-display);
+      font-weight: var(--weight-black);
+      font-size: var(--text-xs);
+    }
+    .deck-agenda-item span {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-bold);
+      color: var(--valon-ink);
+    }
+
+    /* --- Background split panels ---------------------------------------- */
+    .deck-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin: var(--space-6) 0;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      flex: 1;
+      min-height: 0;
+    }
+    .deck-split__left {
+      padding: var(--space-8);
+      background: var(--valon-white);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .deck-split__right {
+      padding: var(--space-8);
+      background: var(--valon-ink);
+      color: var(--valon-gray-light);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .deck-split__kicker {
+      font-size: var(--text-xs);
+      font-weight: var(--weight-bold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-4);
+    }
+    .deck-split__left .deck-split__kicker { color: var(--valon-blue); }
+    .deck-split__right .deck-split__kicker { color: var(--valon-amber); }
+    .deck-split__headline {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: var(--weight-black);
+      line-height: var(--leading-snug);
+      margin: 0 0 var(--space-4);
+    }
+    .deck-split__left .deck-split__headline { color: var(--valon-ink); }
+    .deck-split__right .deck-split__headline { color: var(--valon-white); }
+    .deck-split__body {
+      font-size: var(--text-sm);
+      line-height: var(--leading-relaxed);
+      margin: 0;
+    }
+    .deck-split__left .deck-split__body { color: var(--valon-gray); }
+    .deck-split__right .deck-split__body { color: var(--valon-gray-light); }
+    .deck-split__list {
+      list-style: none;
+      padding: 0;
+      margin: var(--space-4) 0 0;
+    }
+    .deck-split__list li {
+      font-size: var(--text-sm);
+      color: var(--valon-gray-light);
+      line-height: var(--leading-relaxed);
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .deck-split__list li:last-child { border-bottom: 0; }
+    .deck-split__list b {
+      color: var(--valon-amber);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* --- Strategy segments ---------------------------------------------- */
+    .deck-segments {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin: var(--space-8) 0;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+    }
+    .deck-segment {
+      padding: var(--space-6) var(--space-6);
+      background: var(--valon-white);
+      border-right: 1px solid var(--color-border);
+    }
+    .deck-segment:last-child { border-right: 0; }
+    .deck-segment__icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-lg);
+      margin-bottom: var(--space-4);
+    }
+    .deck-segment__name {
+      font-family: var(--font-display);
+      font-weight: var(--weight-bold);
+      font-size: var(--text-sm);
+      color: var(--valon-ink);
+      margin-bottom: var(--space-3);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .deck-segment__body {
+      font-size: var(--text-sm);
+      color: var(--valon-gray);
+      line-height: var(--leading-relaxed);
+      margin: 0;
+    }
+
+    /* --- Build components list ------------------------------------------- */
+    .deck-components {
+      list-style: none;
+      padding: 0;
+      margin: var(--space-6) 0;
+      counter-reset: comp;
+    }
+    .deck-component {
+      counter-increment: comp;
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: var(--space-4);
+      padding: var(--space-4) 0;
+      border-bottom: 1px solid var(--color-border);
+      align-items: baseline;
+    }
+    .deck-component:last-child { border-bottom: 0; }
+    .deck-component::before {
+      content: counter(comp);
+      font-family: var(--font-display);
+      font-weight: var(--weight-black);
+      font-size: var(--text-md);
+      color: var(--valon-amber-deep);
+      text-align: center;
+    }
+    .deck-component__text {
+      font-size: var(--text-base);
+      color: var(--valon-ink-soft);
+      line-height: var(--leading-relaxed);
+    }
+    .deck-component__text b { color: var(--valon-ink); }
+
+    /* --- Rollout phases ------------------------------------------------- */
+    .deck-phases {
+      margin: var(--space-8) 0;
+      position: relative;
+    }
+    .deck-phase {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: var(--space-6);
+      padding: var(--space-6) 0;
+      border-bottom: 1px solid var(--color-border);
+      align-items: start;
+    }
+    .deck-phase:last-child { border-bottom: 0; }
+    .deck-phase__label {
+      position: relative;
+    }
+    .deck-phase__num {
+      font-family: var(--font-display);
+      font-weight: var(--weight-black);
+      font-size: var(--text-3xl);
+      color: var(--valon-ink);
+      line-height: 1;
+    }
+    .deck-phase__name {
+      font-size: var(--text-xs);
+      font-weight: var(--weight-bold);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--valon-gray-mid);
+      margin-top: var(--space-2);
+    }
+    .deck-phase__build {
+      font-size: var(--text-base);
+      color: var(--valon-ink-soft);
+      line-height: var(--leading-relaxed);
+      margin: 0 0 var(--space-3);
+    }
+    .deck-phase__after {
+      font-size: var(--text-sm);
+      color: var(--valon-blue);
+      font-weight: var(--weight-bold);
+      line-height: var(--leading-relaxed);
+    }
+
+    /* --- Success metrics ------------------------------------------------ */
+    .deck-metric {
+      padding: var(--space-4) 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .deck-metric:last-child { border-bottom: 0; }
+    .deck-metric__q {
+      font-family: var(--font-display);
+      font-size: var(--text-md);
+      font-weight: var(--weight-bold);
+      color: var(--valon-ink);
+      line-height: var(--leading-snug);
+      margin: 0;
+    }
+    .deck-metric__detail {
+      font-size: var(--text-sm);
+      color: var(--valon-gray);
+      margin: var(--space-2) 0 0;
+      line-height: var(--leading-relaxed);
+    }
+
+    /* --- Takeaway blocks ------------------------------------------------ */
+    .deck-takeaways {
+      margin: var(--space-6) 0;
+      counter-reset: ta;
+    }
+    .deck-takeaway {
+      counter-increment: ta;
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: var(--space-4);
+      padding: var(--space-4) 0;
+      border-bottom: 1px solid var(--color-border);
+      align-items: baseline;
+    }
+    .deck-takeaway:last-child { border-bottom: 0; }
+    .deck-takeaway::before {
+      content: counter(ta);
+      font-family: var(--font-display);
+      font-weight: var(--weight-black);
+      font-size: var(--text-xl);
+      color: var(--valon-amber);
+      text-align: center;
+      line-height: 1;
+    }
+    .deck-takeaway__text {
+      font-size: var(--text-md);
+      font-weight: var(--weight-bold);
+      color: var(--valon-ink);
+      line-height: var(--leading-snug);
+      margin: 0;
+    }
+    .deck-takeaway__sub {
+      font-size: var(--text-sm);
+      font-weight: var(--weight-regular);
+      color: var(--valon-gray);
+      margin: var(--space-2) 0 0;
+      line-height: var(--leading-relaxed);
+    }
+
+    /* --- Responsive ----------------------------------------------------- */
+    @media (max-width: 768px) {
+      .deck-slide { min-height: auto; }
+      .deck-slide h2 { font-size: var(--text-2xl); }
+      .deck-title h2 { font-size: var(--text-3xl); }
+      .deck-slide p { font-size: var(--text-base); }
+      .deck-split { grid-template-columns: 1fr; }
+      .deck-segments { grid-template-columns: 1fr; }
+      .deck-segment { border-right: 0; border-bottom: 1px solid var(--color-border); }
+      .deck-segment:last-child { border-bottom: 0; }
+      .deck-phase { grid-template-columns: 1fr; }
+      .deck-phase__label { display: flex; align-items: baseline; gap: var(--space-3); }
+      .deck-phase__num { font-size: var(--text-xl); }
+      .deck-pip__label { font-size: 0.625rem; }
+      .deck-agenda { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body class="valon">
@@ -872,6 +1311,7 @@
         <button class="tab-btn" role="tab" data-tab="prd">PRD</button>
         <button class="tab-btn" role="tab" data-tab="demo">Interactive demo</button>
         <button class="tab-btn" role="tab" data-tab="assumptions">Assumptions</button>
+        <button class="tab-btn" role="tab" data-tab="discussion">Discussion</button>
       </div>
     </nav>
   </header>
@@ -2170,6 +2610,263 @@
 
       </article>
     </section>
+
+    <!-- ================================================================
+         Discussion slide deck
+         ================================================================ -->
+    <section class="tab-panel" id="panel-discussion" role="tabpanel">
+      <div class="deck" id="discussionDeck">
+
+        <!-- Progress tracker -->
+        <div class="deck-progress" role="tablist" aria-label="Slide navigation">
+          <button class="deck-pip" role="tab" aria-selected="true"><span class="deck-pip__label">Agenda</span><span class="deck-pip__bar"></span></button>
+          <button class="deck-pip" role="tab"><span class="deck-pip__label">Background</span><span class="deck-pip__bar"></span></button>
+          <button class="deck-pip" role="tab"><span class="deck-pip__label">Strategy</span><span class="deck-pip__bar"></span></button>
+          <button class="deck-pip" role="tab"><span class="deck-pip__label">What to build</span><span class="deck-pip__bar"></span></button>
+          <button class="deck-pip" role="tab"><span class="deck-pip__label">Rollout</span><span class="deck-pip__bar"></span></button>
+          <button class="deck-pip" role="tab"><span class="deck-pip__label">Success</span><span class="deck-pip__bar"></span></button>
+          <button class="deck-pip" role="tab"><span class="deck-pip__label">Takeaways</span><span class="deck-pip__bar"></span></button>
+        </div>
+
+        <!-- ======== SLIDE 0: Agenda ======== -->
+        <div class="deck-slide is-active">
+          <div class="deck-title">
+            <h2>Late payments<br>and collections</h2>
+            <p>Where we are, what we want to build, and how we get there.</p>
+            <ol class="deck-agenda">
+              <li class="deck-agenda-item" data-deck-go="1"><span>Background and problem</span></li>
+              <li class="deck-agenda-item" data-deck-go="2"><span>Strategy</span></li>
+              <li class="deck-agenda-item" data-deck-go="3"><span>What we want to build</span></li>
+              <li class="deck-agenda-item" data-deck-go="4"><span>Rollout</span></li>
+              <li class="deck-agenda-item" data-deck-go="5"><span>Success</span></li>
+              <li class="deck-agenda-item" data-deck-go="6"><span>Takeaways</span></li>
+            </ol>
+          </div>
+
+          <div class="deck-nav">
+            <div></div>
+            <span class="deck-nav__counter">1 / 7</span>
+            <button class="valon-btn valon-btn--primary" data-deck-next>Next &rarr;</button>
+          </div>
+        </div>
+
+        <!-- ======== SLIDE 1: Background & Problem ======== -->
+        <div class="deck-slide">
+          <h2>Background and problem</h2>
+
+          <div class="deck-split">
+            <div class="deck-split__left">
+              <div class="deck-split__kicker">Where we are</div>
+              <p class="deck-split__headline">We onboard and service 30,000 loans today.</p>
+              <p class="deck-split__body">When borrowers make their payments on time, things flow smoothly. Even when they are late, we can accept those payments, and borrowers do use that functionality.</p>
+            </div>
+            <div class="deck-split__right">
+              <div class="deck-split__kicker">The gap</div>
+              <p class="deck-split__headline">The late payment experience is not working well enough.</p>
+              <ul class="deck-split__list">
+                <li><b>25%</b> of our borrowers are hitting late fees</li>
+                <li><b>1.81%</b> are reaching collections, well above the 0.6 to 1.3% industry band</li>
+                <li>Delinquent loans carry a big portion of our book and are hard to collect on</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="deck-nav">
+            <button class="valon-btn valon-btn--outline" data-deck-prev>&larr; Back</button>
+            <span class="deck-nav__counter">2 / 7</span>
+            <button class="valon-btn valon-btn--primary" data-deck-next>Next &rarr;</button>
+          </div>
+        </div>
+
+        <!-- ======== SLIDE 2: Strategy ======== -->
+        <div class="deck-slide">
+          <h2>Strategy</h2>
+
+          <p>Ideally, we have a system for managing delinquency where each borrower gets what they actually need:</p>
+
+          <div class="deck-segments">
+            <div class="deck-segment">
+              <div class="deck-segment__icon" style="background:var(--valon-blue-tint);color:var(--valon-blue)">&#9993;</div>
+              <div class="deck-segment__name">Would pay, just forgot</div>
+              <p class="deck-segment__body">Quick, low-friction nudges to cure, and ideally to get to a better setup: autopay, correct payment method, correct notification channel.</p>
+            </div>
+            <div class="deck-segment">
+              <div class="deck-segment__icon" style="background:#FFF3E0;color:var(--valon-orange)">&#9829;</div>
+              <div class="deck-segment__name">Genuine hardship</div>
+              <p class="deck-segment__body">Identified early, serviced with attention, and offered real paths to avoiding penalties and getting back on track.</p>
+            </div>
+            <div class="deck-segment">
+              <div class="deck-segment__icon" style="background:var(--valon-surface);color:var(--valon-gray)">&#10140;</div>
+              <div class="deck-segment__name">Cannot or will not pay</div>
+              <p class="deck-segment__body">Funneled out compliantly and auditably. This is a natural part of any lending portfolio.</p>
+            </div>
+          </div>
+
+          <div class="deck-nav">
+            <button class="valon-btn valon-btn--outline" data-deck-prev>&larr; Back</button>
+            <span class="deck-nav__counter">3 / 7</span>
+            <button class="valon-btn valon-btn--primary" data-deck-next>Next &rarr;</button>
+          </div>
+        </div>
+
+        <!-- ======== SLIDE 3: What we want to build ======== -->
+        <div class="deck-slide">
+          <h2>What we want to build</h2>
+
+          <ol class="deck-components">
+            <li class="deck-component">
+              <p class="deck-component__text"><b>A delinquency engine</b> that tracks the borrower lifecycle through delinquency stages, encodes business logic, and ensures auditability</p>
+            </li>
+            <li class="deck-component">
+              <p class="deck-component__text"><b>A scheduling layer</b> that ensures the right messages and actions occur at the right time in the borrower lifecycle</p>
+            </li>
+            <li class="deck-component">
+              <p class="deck-component__text"><b>A notification layer</b> that can prioritize among borrower notification preferences and integrates with appropriate vendors to reach borrowers</p>
+            </li>
+            <li class="deck-component">
+              <p class="deck-component__text"><b>A low-friction repayment and config-updating experience</b> for borrowers who receive notifications</p>
+            </li>
+            <li class="deck-component">
+              <p class="deck-component__text"><b>Dedicated agent tooling</b> that helps agents prioritize and service borrowers that respond to notifications with genuine hardship need</p>
+            </li>
+          </ol>
+
+          <div class="callout" style="margin-top:var(--space-4)">
+            <p style="margin:0;font-size:var(--text-sm)"><b>Why now?</b> Our loan book is starting to scale and we need to start making efficient use of our servicing abilities.</p>
+          </div>
+
+          <div class="deck-nav">
+            <button class="valon-btn valon-btn--outline" data-deck-prev>&larr; Back</button>
+            <span class="deck-nav__counter">4 / 7</span>
+            <button class="valon-btn valon-btn--primary" data-deck-next>Next &rarr;</button>
+          </div>
+        </div>
+
+        <!-- ======== SLIDE 4: Rollout ======== -->
+        <div class="deck-slide">
+          <h2>Rollout</h2>
+
+          <p>We see three phases:</p>
+
+          <div class="deck-phases">
+            <div class="deck-phase">
+              <div class="deck-phase__label">
+                <div class="deck-phase__num">1</div>
+                <div class="deck-phase__name">Notify and cure</div>
+              </div>
+              <div>
+                <p class="deck-phase__build">Build the scheduling and notification infrastructure and a borrower payment view that helps borrowers get back on track early.</p>
+                <p class="deck-phase__after">After this: fewer borrowers hit late fees and further stages of delinquency. Agents can better prioritize and service borrowers who do reach delinquency with the tools we have on hand.</p>
+              </div>
+            </div>
+            <div class="deck-phase">
+              <div class="deck-phase__label">
+                <div class="deck-phase__num">2</div>
+                <div class="deck-phase__name">Agent portal</div>
+              </div>
+              <div>
+                <p class="deck-phase__build">Build our agent portal around our notifications.</p>
+                <p class="deck-phase__after">After this: agents have context on borrower communications and prior servicing actions, and a more formal case management system for delinquency cases that really require agent outreach.</p>
+              </div>
+            </div>
+            <div class="deck-phase">
+              <div class="deck-phase__label">
+                <div class="deck-phase__num">3</div>
+                <div class="deck-phase__name">Hardship and ownership</div>
+              </div>
+              <div>
+                <p class="deck-phase__build">Strengthen our core to offer better hardship optionality, and enable agent ops to manage notification content on their own.</p>
+                <p class="deck-phase__after">After this: we can hand complete ownership over the delinquency experience, delinquency management, and delinquency metrics to our ops teams.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="deck-nav">
+            <button class="valon-btn valon-btn--outline" data-deck-prev>&larr; Back</button>
+            <span class="deck-nav__counter">5 / 7</span>
+            <button class="valon-btn valon-btn--primary" data-deck-next>Next &rarr;</button>
+          </div>
+        </div>
+
+        <!-- ======== SLIDE 5: Success ======== -->
+        <div class="deck-slide">
+          <h2>Success</h2>
+
+          <p>We can measure success by <b>borrower correction and sustainability</b>.</p>
+
+          <div style="margin:var(--space-6) 0">
+            <div class="deck-metric">
+              <p class="deck-metric__q">Are borrowers correcting more quickly before late fees?</p>
+              <p class="deck-metric__detail">Are they switching onto autopay after missed payments at higher rates?</p>
+            </div>
+            <div class="deck-metric">
+              <p class="deck-metric__q">Is the agent caseload shifting to the long tail?</p>
+              <p class="deck-metric__detail">As the early stages resolve themselves, agents should spend their time on the cases that genuinely need a person.</p>
+            </div>
+            <div class="deck-metric">
+              <p class="deck-metric__q">Are hardship plans utilized for later-stage delinquencies?</p>
+              <p class="deck-metric__detail">When utilized, do they sustainably lead to good repayment behaviors?</p>
+            </div>
+            <div class="deck-metric">
+              <p class="deck-metric__q">Can we test the boundaries of what triggers delinquency?</p>
+              <p class="deck-metric__detail">And use that to segment borrowers towards alternative product offerings?</p>
+            </div>
+          </div>
+
+          <div class="deck-nav">
+            <button class="valon-btn valon-btn--outline" data-deck-prev>&larr; Back</button>
+            <span class="deck-nav__counter">6 / 7</span>
+            <button class="valon-btn valon-btn--primary" data-deck-next>Next &rarr;</button>
+          </div>
+        </div>
+
+        <!-- ======== SLIDE 6: Takeaways ======== -->
+        <div class="deck-slide">
+          <h2>Takeaways</h2>
+
+          <div class="deck-takeaways">
+            <div class="deck-takeaway">
+              <div>
+                <p class="deck-takeaway__text">Late payments are our biggest servicing gap</p>
+                <p class="deck-takeaway__sub">A quarter of borrowers hit late fees, 1.81% reach collections, and the delinquent portion of our book is growing.</p>
+              </div>
+            </div>
+            <div class="deck-takeaway">
+              <div>
+                <p class="deck-takeaway__text">Different borrowers need different paths</p>
+                <p class="deck-takeaway__sub">Forgetful payers need a nudge. Hardship cases need a person. Portfolio exits need a compliant process.</p>
+              </div>
+            </div>
+            <div class="deck-takeaway">
+              <div>
+                <p class="deck-takeaway__text">Five pieces of infrastructure make this work</p>
+                <p class="deck-takeaway__sub">Engine, scheduler, notifications, repayment experience, and agent tooling. They compose into each later phase.</p>
+              </div>
+            </div>
+            <div class="deck-takeaway">
+              <div>
+                <p class="deck-takeaway__text">Roll out in phases, prove each one</p>
+                <p class="deck-takeaway__sub">Start with notifications and self-cure. Then the agent portal. Then hardship tools and ops ownership.</p>
+              </div>
+            </div>
+            <div class="deck-takeaway">
+              <div>
+                <p class="deck-takeaway__text">Success is borrowers correcting faster and staying current</p>
+                <p class="deck-takeaway__sub">Measure correction speed, autopay adoption, agent caseload shift, and hardship plan sustainability.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="deck-nav">
+            <button class="valon-btn valon-btn--outline" data-deck-prev>&larr; Back</button>
+            <span class="deck-nav__counter">7 / 7</span>
+            <button class="valon-btn valon-btn--outline" data-deck-go="0">Back to agenda</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <section class="tab-panel" id="panel-demo" role="tabpanel">
       <!-- Interactive demo. State lives in localStorage under valon.demo.v3.
            One global clock drives the whole portfolio: as it advances, every
@@ -2343,7 +3040,7 @@
     // tab names drive activate(); any other hash is treated as a scroll target
     // inside the current panel and never switches tabs.
     (function () {
-      var tabs = ['exec', 'prd', 'demo', 'assumptions'];
+      var tabs = ['exec', 'prd', 'demo', 'assumptions', 'discussion'];
       var buttons = Array.prototype.slice.call(document.querySelectorAll('.tab-btn'));
 
       function activate(tab) {
@@ -2386,6 +3083,65 @@
 
       var initial = window.location.hash.replace('#', '');
       activate(tabs.indexOf(initial) !== -1 ? initial : 'exec');
+    })();
+
+    // Discussion slide deck navigation. Scoped to #discussionDeck so it never
+    // touches the page tabs or the flow rail.
+    (function () {
+      var deck = document.getElementById('discussionDeck');
+      if (!deck) return;
+
+      var slides = Array.prototype.slice.call(deck.querySelectorAll('.deck-slide'));
+      var pips = Array.prototype.slice.call(deck.querySelectorAll('.deck-pip'));
+      var current = 0;
+      var visited = { 0: true };
+
+      function go(i) {
+        if (i < 0 || i >= slides.length) return;
+        current = i;
+        visited[i] = true;
+
+        slides.forEach(function (s, idx) {
+          s.classList.toggle('is-active', idx === i);
+        });
+        pips.forEach(function (p, idx) {
+          p.classList.toggle('is-active', idx === i);
+          p.classList.toggle('is-visited', !!visited[idx] && idx !== i);
+          p.setAttribute('aria-selected', idx === i ? 'true' : 'false');
+        });
+
+        var prevBtns = deck.querySelectorAll('[data-deck-prev]');
+        var nextBtns = deck.querySelectorAll('[data-deck-next]');
+        Array.prototype.slice.call(prevBtns).forEach(function (b) { b.disabled = i === 0; });
+        Array.prototype.slice.call(nextBtns).forEach(function (b) { b.disabled = i === slides.length - 1; });
+
+        var counters = deck.querySelectorAll('.deck-nav__counter');
+        Array.prototype.slice.call(counters).forEach(function (c) {
+          c.textContent = (i + 1) + ' / ' + slides.length;
+        });
+
+        deck.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      pips.forEach(function (p, idx) {
+        p.addEventListener('click', function () { go(idx); });
+      });
+
+      deck.addEventListener('click', function (e) {
+        if (e.target.closest('[data-deck-prev]')) go(current - 1);
+        if (e.target.closest('[data-deck-next]')) go(current + 1);
+        var jump = e.target.closest('[data-deck-go]');
+        if (jump) go(parseInt(jump.dataset.deckGo, 10));
+      });
+
+      document.addEventListener('keydown', function (e) {
+        var panel = document.getElementById('panel-discussion');
+        if (!panel || !panel.classList.contains('is-active')) return;
+        if (e.key === 'ArrowRight') { e.preventDefault(); go(current + 1); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+      });
+
+      go(0);
     })();
 
     // Interactive delinquency workflow: clicking a stage in the rail shows its
